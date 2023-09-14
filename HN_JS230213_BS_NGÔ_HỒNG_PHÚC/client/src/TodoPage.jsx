@@ -9,18 +9,22 @@ function TodoPage() {
     setTodoName(e.target.value);
   };
 
-  useEffect(() => {
+  const getPost = () => {
     axios
       .get("http://localhost:6868/api/v1/todos")
       .then((res) => setTodoList(res.data.todos))
       .catch((err) => console.log(err));
-  }, [todoList]);
+  };
+  useEffect(() => {
+    getPost();
+  }, []);
 
   const handleAddTodo = () => {
     axios
       .post("http://localhost:6868/api/v1/todos", { name: todoName })
       .then((res) => {
         console.log(res.data);
+        getPost();
       })
       .catch((err) => {
         console.log(err);
@@ -32,6 +36,7 @@ function TodoPage() {
       .put(`http://localhost:6868/api/v1/todos/${id}`, { status: "completed" })
       .then((res) => {
         console.log(res.data);
+        getPost();
       })
       .catch((err) => {
         console.log(err);
@@ -45,6 +50,7 @@ function TodoPage() {
       })
       .then((res) => {
         console.log(res.data);
+        getPost();
       })
       .catch((err) => {
         console.log(err);
@@ -56,6 +62,7 @@ function TodoPage() {
       .delete(`http://localhost:6868/api/v1/todos/${id}`)
       .then((res) => {
         console.log(res.data);
+        getPost();
       })
       .catch((err) => {
         console.log(err);
