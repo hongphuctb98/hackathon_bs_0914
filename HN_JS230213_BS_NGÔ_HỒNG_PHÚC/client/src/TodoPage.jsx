@@ -27,9 +27,22 @@ function TodoPage() {
       });
   };
 
-  const handleChangeStatus = (id) => {
+  const handleCompleted = (id) => {
     axios
       .put(`http://localhost:6868/api/v1/todos/${id}`, { status: "completed" })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleUnCompleted = (id) => {
+    axios
+      .put(`http://localhost:6868/api/v1/todos/${id}`, {
+        status: "uncompleted",
+      })
       .then((res) => {
         console.log(res.data);
       })
@@ -77,7 +90,7 @@ function TodoPage() {
                         <i
                           class="fa-regular fa-circle-check"
                           style={{ paddingRight: "15px", cursor: "pointer" }}
-                          onClick={() => handleChangeStatus(todo.id)}
+                          onClick={() => handleCompleted(todo.id)}
                         ></i>
                       </div>
                     </li>
@@ -102,6 +115,7 @@ function TodoPage() {
                         <i
                           class="fa-regular fa-circle-check"
                           style={{ paddingRight: "15px", cursor: "pointer" }}
+                          onClick={() => handleUnCompleted(todo.id)}
                         ></i>
                       </div>
                     </li>
