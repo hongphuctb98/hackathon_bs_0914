@@ -97,6 +97,7 @@ function TodoPage() {
                         <i
                           class="fa-solid fa-trash-can"
                           style={{ paddingRight: "15px", cursor: "pointer" }}
+                          onClick={() => handleDelete(todo.id)}
                         ></i>
                         <i
                           class="fa-regular fa-circle-check"
